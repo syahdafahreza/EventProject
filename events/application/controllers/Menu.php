@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Menu extends CI_Controller {
+class menu extends CI_Controller {
 
   public function __construct() //method untuk menerapkan seluruh fungsi didalamnya ke dalam seluruh method di controller
 	{

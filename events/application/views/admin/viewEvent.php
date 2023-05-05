@@ -77,41 +77,81 @@
             <!-- End of Topbar -->
 
             <div class="container">
-                <div class="col-lg-6">
-                <h1 class="h3 mb-4 text-gray-800"><a href="<?php echo base_url(); ?>admin">Home</a><?php echo " / ". $title; ?></h1>
+                <h1 class="h3 mb-4 text-gray-800"><a href="<?php echo base_url(); ?>admin">Home</a><?php echo " / ".$title." / ".$events['name']; ?></h1>
+                <table>
+                    <tr>
+                        <td>Tanggal</td>
+                        <td>:</td>
+                        <td><?php echo $events['tgl']?></td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Peserta</td>
+                        <td>:</td>
+                        <td><?php echo $events['jum_peserta']?></td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Participant</td>
+                        <td>:</td>
+                        <td><?php echo $jp?></td>
+                    </tr>
+                    <tr>
+                        <td>Harga</td>
+                        <td>:</td>
+                        <td><?php echo $events['harga']?></td>
+                    </tr>
+                    <tr>
+                        <td>Penghasilan</td>
+                        <td>:</td>
+                        <td><?php echo $events['harga']*$jp?></td>
+                    </tr>
+                </table>
 
-                    <form class="" action="<?php echo base_url('admin/addEvent'); ?>" method="post">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name">
-                            <?php echo form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
-                        </div>
+                <h2 class="h4 mt-5 text-gray-800">Daftar Participant</h2>
+                <div class="col-lg-10">
 
-                        <div class="form-group">
-                            <label for="tanggal">Tanggal</label>
-                            <input type="Date" class="form-control" id="tanggal" name="tanggal">
-                            <?php echo form_error('tanggal', '<small class="text-danger pl-3">', '</small>'); ?>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="jum_peserta">Jumlah peserta</label>
-                            <input type="text" class="form-control" id="jum_peserta" name="jum_peserta">
-                            <?php echo form_error('jum_peserta', '<small class="text-danger pl-3">', '</small>'); ?>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="harga">Harga</label>
-                            <input type="text" class="form-control" id="harga" name="harga">
-                            <?php echo form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
-                        </div>
+                        <?php if (empty($participant)) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                Data tidak ditemukan
+                            </div>
+                        <?php endif ?>
 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Add Event</button>
-                        </div>
+                        <!-- flashdata message -->
+                        <?php echo $this->session->flashdata('message'); ?>
 
-                    </form>
+                        <!-- Table -->
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Keterangan</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                foreach ($participant as $par) : ?>
+                                    <tr>
+                                        <!-- tidak urut sesuai table mysql, tidak apa2 -->
+                                        <th scope="row"><?php echo $i; ?></th>
+                                        <td><?php echo $par['name']; ?></td>
+                                        <td><?php echo  $par['contact'] ?></td>
+                                        <td><?php echo  $par['keterangan'] ?></td>
 
-                </div>
+                                    </tr>
+                                <?php
+                                    $i++;
+                                endforeach; ?>
+                            </tbody>
+                        </table>
+
+                        <!-- <a href="<?php echo base_url(); ?>admin" class="btn btn-secondary">Home</a> -->
+
+                    </div>
             </div>
 
 

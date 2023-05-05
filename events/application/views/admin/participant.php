@@ -77,7 +77,7 @@
             <!-- End of Topbar -->
 
             <div class="container">
-                <h1 class="h3 mb-4 text-gray-800"><?php echo $title; ?></h1>
+                <h1 class="h3 mb-4 text-gray-800"><a href="<?php echo base_url(); ?>admin">Home</a><?php echo  (" / ".$title); ?></h1>
                 <div class="col-lg-6">
 
                     <form class="" action="<?php echo base_url('admin/participant/' . $id_event); ?>" method="post">
@@ -91,6 +91,12 @@
                             <label for="contact">contact</label>
                             <input type="text" class="form-control" id="contact" name="contact">
                             <?php echo form_error('contact', '<small class="text-danger pl-3">', '</small>'); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="keterangan">Keterangan</label>
+                            <input type="text" class="form-control" id="keterangan" name="keterangan">
+                            <?php echo form_error('keterangan', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
 
 
@@ -125,6 +131,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Contact</th>
+                                    <th scope="col">Keterangan</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -137,6 +144,7 @@
                                         <th scope="row"><?php echo $i; ?></th>
                                         <td><?php echo $p['name']; ?></td>
                                         <td><?php echo  $p['contact'] ?></td>
+                                        <td><?php echo  $p['keterangan'] ?></td>
 
                                         <td>
                                             <a class="badge badge-danger" href="<?php echo base_url(); ?>admin/delete_participant/<?php echo $p['id'] ?>" onclick="return confirm('Partisipan akan dihapus, yakin?');">delete</a>
@@ -149,7 +157,7 @@
                             </tbody>
                         </table>
 
-                        <a href="<?php echo base_url(); ?>admin" class="btn btn-secondary">Home</a>
+                        
 
                     </div>
                 </div>

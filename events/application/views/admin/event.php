@@ -117,6 +117,7 @@
 
                                         <td>
                                             <!-- <a class="badge badge-warning" href="<?php echo base_url(); ?>admin/change_status_user/<?php echo $e['id']  ?>">ubah status</a> -->
+                                            <a class="badge badge-primary" href="<?php echo base_url(); ?>admin/viewEvent/<?php echo $e['id'] ?>" >View</a>
                                             <a class="badge badge-danger" href="<?php echo base_url(); ?>admin/delete_events/<?php echo $e['id'] ?>" onclick="return confirm('User akan dihapus, yakin?');">delete</a>
                                             <a class="badge badge-success" href="<?php echo base_url(); ?>admin/participant/<?php echo $e['id'] ?>">Participant</a>
                                         </td>

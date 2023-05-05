@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller
+class admin extends CI_Controller
 {
 
   public function __construct() //method untuk menerapkan seluruh fungsi didalamnya ke dalam seluruh method di controller
@@ -202,6 +202,7 @@ class Admin extends CI_Controller
     $this->form_validation->set_rules("name", "Name", "required");
     $this->form_validation->set_rules("tanggal", "Tanggal", "required");
     $this->form_validation->set_rules("jum_peserta", "Jumlah Peserta", "required");
+    $this->form_validation->set_rules("harga", "Harga", "required");
 
 
     if ($this->form_validation->run() == false) {
@@ -210,7 +211,8 @@ class Admin extends CI_Controller
       $data = [
         'name' => htmlspecialchars($this->input->post('name', true)),
         'tgl' => $this->input->post('tanggal', true),
-        'jum_peserta' => $this->input->post('jum_peserta', true)
+        'jum_peserta' => $this->input->post('jum_peserta', true),
+        'harga' => $this->input->post('harga', true)
 
       ];
       $this->db->insert('listevent', $data);
@@ -241,6 +243,7 @@ class Admin extends CI_Controller
 
     $this->form_validation->set_rules("name", "Name", "required");
     $this->form_validation->set_rules("contact", "Kontak", "required");
+    $this->form_validation->set_rules("keterangan", "Keterangan", "required");
 
 
     if ($this->form_validation->run() == false) {
@@ -250,6 +253,7 @@ class Admin extends CI_Controller
       $data = [
         'name' => htmlspecialchars($this->input->post('name', true)),
         'contact' => $this->input->post('contact', true),
+        'keterangan' => $this->input->post('keterangan', true),
         'id_events' => $this->input->post('id_event', true)
 
       ];
@@ -268,4 +272,31 @@ class Admin extends CI_Controller
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Participant berhasil dihapus</div>');
     redirect('admin');
   }
+
+  public function viewEvent($id)
+  {
+    $data['title'] = 'View Event';
+    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['events'] = $this->db->get_where('listevent',['id'=>$id])->row_array();
+    // $data['participant'] = $this->db->get('participant')->result_array();
+
+    // $data['participant']=$this->db->get_where('participant',['id'=>$id])->result_array();
+    // var_dump($data['participant']);
+    $query = " SELECT * FROM participant where id_events=$id";
+    $data['participant']=$this->db->query($query)->result_array();
+    // $res = $this->db->query($query)->result_array();
+    $data['jp']=$this->db->query($query)->num_rows();
+
+    // // echo $res['dbget'];
+
+    // var_dump($data['jp']);
+    // die();
+
+    $this->load->view('admin/viewEvent', $data);
+
+    
+
+
+  }
+
 }

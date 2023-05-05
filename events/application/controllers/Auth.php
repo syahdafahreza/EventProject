@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller
+class auth extends CI_Controller
 {
 	public function __construct() //method untuk menerapkan seluruh fungsi didalamnya ke dalam seluruh method di controller
 	{
